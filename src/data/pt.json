@@ -1,0 +1,6 @@
+{
+    "USER_NOT_IDENTIFIED": "Usuário não identificado.",
+    "NOT_PERMISSION": "Você não possui permissões, contate o administrador",
+    "RECENT_LOGIN_REQUIRED": "Um login recente é requerido",
+    "UNAUTHORIZED_REQUEST": "A requisição não foi autorizada"
+}

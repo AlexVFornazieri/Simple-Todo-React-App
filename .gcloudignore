@@ -1,0 +1,5 @@
+.git
+.gitignore
+#!include:.gitignore
+!firebase-config.json
+!.env
