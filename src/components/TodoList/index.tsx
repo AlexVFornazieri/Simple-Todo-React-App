@@ -1,12 +1,17 @@
 import List from '@mui/material/List'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { TodoItem } from '@/models/TodoItem'
-import { Button } from '@mui/material'
+import { Button, LinearProgress } from '@mui/material'
+import { getObject, saveObject } from '@/store'
+
 import { TaskLine } from '../TaskLine'
 import styles from './styles.module.scss'
 
+const collection = 'todoItems'
+
 export const TodoList = () => {
-  const [items, setItems] = useState<TodoItem[]>([new TodoItem()])
+  const [items, setItems] = useState<TodoItem[]>([])
+  const [loading, setLoading] = useState<boolean>(true)
 
   const updateItem = (item: TodoItem) => {
     const index = items.indexOf(item)
@@ -15,8 +20,21 @@ export const TodoList = () => {
     }
     const newItems = [...items]
     newItems[index] = item
+    saveObject(collection, newItems)
     setItems(newItems)
   }
+
+  useEffect(() => {
+    getObject(collection)
+      .then((data) => {
+        const storedItems = data ?? [new TodoItem()]
+        setItems(storedItems)
+        setLoading(false)
+      })
+      .catch((err) => {
+        console.error(err)
+      })
+  }, [setItems, setLoading])
 
   const newItem = () => {
     setItems([...items, new TodoItem()])
@@ -26,6 +44,7 @@ export const TodoList = () => {
     const index = items.indexOf(item)
     const newItems = [...items]
     newItems.splice(index, 1)
+    saveObject(collection, newItems)
     setItems(newItems)
   }
 
@@ -59,7 +78,11 @@ export const TodoList = () => {
       })}
     </List>
     <p className='textCenter'>
-    <Button onClick={newItem}>Add task</Button>
+      {
+      loading
+        ? <LinearProgress />
+        : <Button onClick={newItem}>Add task</Button>
+      }
     </p>
     </div>
   )

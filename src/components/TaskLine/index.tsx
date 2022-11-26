@@ -38,6 +38,7 @@ export const TaskLine = ({
     <TextField
     variant="standard"
     placeholder="Whats need to be done?"
+    value={item.text}
     onChange={(e) => {
       updateText(item, e.target.value)
     }}
