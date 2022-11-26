@@ -1,6 +1,5 @@
-export interface TodoItem {
-  uuid: string
-  text: string
-  done: boolean
-  editing: boolean
+export class TodoItem {
+  uuid: string = ''
+  text: string = ''
+  done: boolean = false
 }

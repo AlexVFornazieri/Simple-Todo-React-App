@@ -35,7 +35,6 @@ export const TaskLine = ({
       disableRipple
       inputProps={{ 'aria-labelledby': labelId }}
     />
-    {item.editing && <>
     <TextField
     variant="standard"
     placeholder="Whats need to be done?"
@@ -51,7 +50,6 @@ export const TaskLine = ({
       />
     </IconButton>
     </ListItemSecondaryAction>
-    </>}
   </ListItem>
   )
 }

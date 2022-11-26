@@ -1,15 +1,12 @@
 import List from '@mui/material/List'
-import { v1 as uuid } from 'uuid'
 import { useState } from 'react'
 import { TodoItem } from '@/models/TodoItem'
 import { Button } from '@mui/material'
 import { TaskLine } from '../TaskLine'
 import styles from './styles.module.scss'
 
-const cleanItem = (): TodoItem => ({ text: '', done: false, uuid: uuid(), editing: true })
-
 export const TodoList = () => {
-  const [items, setItems] = useState<TodoItem[]>([cleanItem()])
+  const [items, setItems] = useState<TodoItem[]>([new TodoItem()])
 
   const updateItem = (item: TodoItem) => {
     const index = items.indexOf(item)
@@ -22,16 +19,13 @@ export const TodoList = () => {
   }
 
   const newItem = () => {
-    setItems([...items, cleanItem()])
+    setItems([...items, new TodoItem()])
   }
 
   const removeItem = (item: TodoItem) => {
     const index = items.indexOf(item)
     const newItems = [...items]
     newItems.splice(index, 1)
-    if (newItems.length === 0) {
-      newItems.push(cleanItem())
-    }
     setItems(newItems)
   }
 
@@ -65,7 +59,7 @@ export const TodoList = () => {
       })}
     </List>
     <p className='textCenter'>
-    <Button onClick={newItem}>Adicionar task</Button>
+    <Button onClick={newItem}>Add task</Button>
     </p>
     </div>
   )

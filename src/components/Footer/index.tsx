@@ -5,7 +5,7 @@ export const Footer = () => {
     <footer
       className={styles.footer}
     >
-       A TO-DO App with react by
+       Made with React by
        <a
        href="https://www.linkedin.com/in/alexvfornazierie/"
        target="_blank"
