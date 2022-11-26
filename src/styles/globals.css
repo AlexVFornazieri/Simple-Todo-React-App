@@ -4,6 +4,7 @@ body {
   margin: 0;
   font-family: Roboto, sans-serif;
   font-size: 14px;
+  padding-bottom: 35px;
 }
 
 a {
@@ -13,6 +14,10 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+.textCenter {
+  text-align: center;
 }
 
 @media (prefers-color-scheme: dark) {
