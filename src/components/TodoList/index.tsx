@@ -81,7 +81,7 @@ export const TodoList = () => {
       {
       loading
         ? <LinearProgress />
-        : <Button onClick={newItem}>Add task</Button>
+        : <Button data-testid='addButton' onClick={newItem}>Add task</Button>
       }
     </p>
     </div>
