@@ -22,6 +22,46 @@ describe('Todo list', () => {
     expect(todoInputs[0].getAttribute('value')).toBe('')
   })
 
+  it('Should save TODO when edited', async () => {
+    // Create mooks todo items
+    const todosMock = [
+      new TodoItem('A todo', true),
+      new TodoItem('Another todo'),
+    ]
+
+    // Mock store function
+    jest.spyOn(store, 'getObject')
+      .mockImplementation((): any => new Promise(resolve => resolve(todosMock)))
+    const saveObjectMock = jest.spyOn(store, 'saveObject')
+      .mockImplementation((): any => {})
+
+    const wrapper = render(<TodoList />)
+
+    await waitFor(() => {
+      // await for loading
+      const addButton = wrapper.getByTestId('addButton')
+      expect(addButton).toBeInTheDocument()
+    })
+
+    // Find all input
+    const todoInputs = await wrapper.findAllByPlaceholderText('Whats need to be done?')
+
+    // Write in a todo input
+    fireEvent.change(todoInputs[0], {
+      target: {
+        value: 'It is a test',
+      },
+    })
+    expect(saveObjectMock.mock.calls[0][1][0].text).toBe('It is a test')
+
+    // Find all checkbox
+    const todoChecks = await wrapper.findAllByRole('checkbox')
+
+    // Click in todo checkbox
+    fireEvent.click(todoChecks[1])
+    expect(saveObjectMock.mock.calls[1][1][1].done).toBeTruthy()
+  })
+
   it('Should show saved TODOs correctly', async () => {
     // Create mooks todo items
     const todosMock = [
