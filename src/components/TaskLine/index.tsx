@@ -12,7 +12,6 @@ import styles from './styles.module.scss'
 
 interface TaskLineProps {
   item: TodoItem
-  labelId: string
   handleToggle: (item: TodoItem) => void
   updateText: (item: TodoItem, text: string) => void
   removeItem: (item: TodoItem) => void
@@ -20,7 +19,6 @@ interface TaskLineProps {
 
 export const TaskLine = ({
   item,
-  labelId,
   handleToggle,
   updateText,
   removeItem,
@@ -33,7 +31,7 @@ export const TaskLine = ({
       checked={item.done}
       tabIndex={-1}
       disableRipple
-      inputProps={{ 'aria-labelledby': labelId }}
+      inputProps={{ role: 'checkbox' }}
     />
     <TextField
     variant="standard"
@@ -45,7 +43,7 @@ export const TaskLine = ({
     className={`${item.done ? styles.listChecked : ''} ${styles.textField}`}
     />
       <ListItemSecondaryAction>
-    <IconButton onClick={() => removeItem(item)}>
+    <IconButton onClick={() => removeItem(item)} role="remove-button">
       <Delete
       color="error"
       />

@@ -68,7 +68,6 @@ export const TodoList = () => {
         return (
           <TaskLine
           key={labelId}
-          labelId={labelId}
           item={item}
           handleToggle={handleToggle}
           updateText={updateText}
